@@ -5,7 +5,7 @@ import android.util.Log
 import com.foolchen.ijkplayer.example.base.BaseActivity
 import com.foolchen.ijkplayer.example.utils.getScreenWidth
 import com.foolchen.ijkplayer.example.utils.resize
-import com.foolchen.ijkplayer.example.widget.media.AndroidMediaController
+import com.foolchen.ijkplayer.example.widget.media.IjkMediaController
 import com.xcar.ijkplayerexample.R
 import kotlinx.android.synthetic.main.activity_video_player.*
 
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_video_player.*
  */
 class VideoPlayerActivity : BaseActivity() {
     private val TAG: String by lazy { this@VideoPlayerActivity::class.java.simpleName }
-    private lateinit var mMediaController: AndroidMediaController
+    private lateinit var mMediaController: IjkMediaController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +26,8 @@ class VideoPlayerActivity : BaseActivity() {
 
         video_player.apply {
             resize()
-            mMediaController = AndroidMediaController(this@VideoPlayerActivity, false)
-            mMediaController.setSupportActionBar(supportActionBar)
+            mMediaController = IjkMediaController(this@VideoPlayerActivity)
+            //mMediaController.setSupportActionBar(supportActionBar)
             setMediaController(mMediaController)
             setHudView(hud_view)
             setVideoPath("http://vn.xcar.com.cn/xtv/qiniu/video/converted/mp4/2017/11/30/mp4_o_1c05e8d2qo1knlk2ai1eq9dq81j_720p.mp4")
