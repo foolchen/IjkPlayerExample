@@ -47,6 +47,9 @@ class IjkMediaController(context: Context) : FrameLayout(context), IMediaControl
      * @param view 控制器的锚定View，一般为播放器本身
      */
     override fun setAnchorView(view: View?) {
+        // 如果新设置的anchor与旧的相同，则直接取消处理
+        if (view == mAnchorView) return
+
         // 如果已经有了anchor view（之前设置过anchor view），则将原先的anchor view与布局监听解除联系，防止错误回调
         mAnchorView?.removeOnLayoutChangeListener(mLayoutChangeListener)
         mAnchorView = view
