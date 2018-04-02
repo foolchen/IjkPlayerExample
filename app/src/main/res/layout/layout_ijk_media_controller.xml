@@ -2,8 +2,36 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:background="@color/colorAccent"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/control_background"
     >
 
+  <android.support.v7.widget.AppCompatImageButton
+      android:id="@+id/btn_play"
+      android:layout_width="45dp"
+      android:layout_height="45dp"
+      android:background="@null"
+      android:src="@drawable/ic_media_pause"
+      />
+
+  <SeekBar
+      android:id="@+id/sb_progress"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/btn_fullscreen"
+      app:layout_constraintStart_toEndOf="@id/btn_play"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:progress="50"
+      />
+
+  <android.support.v7.widget.AppCompatImageButton
+      android:id="@+id/btn_fullscreen"
+      android:layout_width="45dp"
+      android:layout_height="45dp"
+      android:background="@null"
+      android:src="@drawable/ic_media_fullscreen"
+      app:layout_constraintEnd_toEndOf="parent"
+      />
 </android.support.constraint.ConstraintLayout>
