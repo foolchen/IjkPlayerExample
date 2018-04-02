@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.AppCompatImageButton
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.*
 import com.xcar.ijkplayerexample.R
+import kotlin.math.round
 
 /**
  * 自定义的播放器控制器
@@ -53,9 +55,22 @@ class IjkMediaController(context: Context) : FrameLayout(context), IMediaControl
 
     private val mSeekListener = object : SeekBar.OnSeekBarChangeListener {
         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+            // 在已播放完毕时，将播放器重置
+            Log.i("IjkMediaController", "one = ${round(progress / 10F).toInt()},two = ${round(
+                (seekBar?.max ?: 0) / 10F).toInt()}")
+            if (round(progress / 10F).toInt() == round(
+                    (seekBar?.max ?: 0) / 10F).toInt()) {
+                mPlayer?.apply {
+                    pause()
+                    updatePausePlay()
+                    seekTo(0)
+                }
+                return
+            }
+
             if (!fromUser) return // 如果不是用户操作的，则直接跳出，不进行处理
 
-            // 如果为用户胡改变了进度，则跳转到新的进度
+            // 如果为用户改变了进度，则跳转到新的进度
             mPlayer?.apply {
                 val duration = duration
                 val newPosition = duration * progress / 1000L
